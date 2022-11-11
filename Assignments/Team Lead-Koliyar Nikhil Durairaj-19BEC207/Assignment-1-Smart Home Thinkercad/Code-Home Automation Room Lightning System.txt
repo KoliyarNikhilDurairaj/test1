@@ -1,0 +1,70 @@
+int bulb = 13;
+int bulb2 = 12; 
+int inputPir = 2;                   
+int val = 0;                        
+int photosensor;
+int sensorLDR = A0; 	 
+
+
+
+
+void setup() { 
+  pinMode(bulb, OUTPUT);
+  pinMode(bulb2, OUTPUT); 
+  pinMode(inputPir, INPUT);        
+  pinMode(sensorLDR, INPUT);		
+  Serial.begin(9600); 				 
+  
+} 
+
+void loop(){ 
+  val = digitalRead(inputPir); 
+  photosensor = analogRead(sensorLDR);
+  
+  //1st Bulb
+  if (photosensor<300)
+      { 			 	
+	  if (val == HIGH) { 
+    	digitalWrite(bulb, HIGH);
+        Serial.println(photosensor);
+   	 	delay(100);	
+       }
+  
+    else 
+       { 
+         digitalWrite(bulb, LOW); 
+         delay(300);   
+       }  
+  } 
+  
+  
+  
+  //2nd bulb
+  
+  
+  else if(photosensor>300 && photosensor<600)
+  {
+    if (val == HIGH) { 
+    	digitalWrite(bulb2, HIGH);
+        Serial.println(photosensor);
+   	 	delay(100);
+    }
+    
+    else 
+    { 
+      digitalWrite(bulb2, LOW); 
+      delay(300);   
+     } 
+    
+  }
+  
+  
+  
+  //1st bulb off
+  else{ digitalWrite(bulb,LOW); 	
+  Serial.println(photosensor); 	
+  delay(500); 						
+  }
+   
+  
+}
